@@ -1,12 +1,10 @@
 package com.example.petclinic.model.service;
 
-import com.example.petclinic.model.Pet;
-
 import java.util.Set;
 
 public interface CrudService<T,ID> {
     T findById(ID id);
-    T save(T object);
+    T save(T object, ID id);
     Set<T> findAll();
     void delete(T object);
     void deleteById(ID id);
