@@ -1,15 +1,13 @@
 package com.example.petclinic.map;
 
+import com.example.petclinic.model.BaseEntity;
 import com.example.petclinic.service.CrudService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public abstract class AbstractMapService<T,ID> implements CrudService<T,ID> {
+public abstract class AbstractMapService<T extends BaseEntity,ID extends Long> implements CrudService<T,ID> {
 
-    protected final Map<ID,T> map;
+    protected final Map<Long,T> map;
 
     public AbstractMapService() {
         map = new HashMap<>();
@@ -21,8 +19,16 @@ public abstract class AbstractMapService<T,ID> implements CrudService<T,ID> {
     }
 
     @Override
-    public T save(T object, ID id) {
-        return map.put(id, object);
+    public T save(T object) {
+        if (object != null){
+            if (object.getId() == null){
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Objects cannot be null");
+        }
+        return object;
     }
 
     @Override
@@ -39,5 +45,13 @@ public abstract class AbstractMapService<T,ID> implements CrudService<T,ID> {
     @Override
     public void deleteById(ID id) {
         map.remove(id);
+    }
+
+    private Long getNextId(){
+        try{
+            return Collections.max(map.keySet()) + 1L;
+        } catch (NoSuchElementException ex){
+            return 1L;
+        }
     }
 }
