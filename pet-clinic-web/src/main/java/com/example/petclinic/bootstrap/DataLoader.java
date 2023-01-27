@@ -33,9 +33,9 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1, owner1.getId());
 
         Owner owner2 = new Owner();
-        owner1.setId(2L);
-        owner1.setFirstName("Fiona");
-        owner1.setLastName("Glenanne");
+        owner2.setId(2L);
+        owner2.setFirstName("Fiona");
+        owner2.setLastName("Glenanne");
 
         ownerService.save(owner2, owner2.getId());
 
