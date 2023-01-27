@@ -1,10 +1,10 @@
-package com.example.petclinic.model.map;
+package com.example.petclinic.map;
 
 import com.example.petclinic.model.Owner;
-import com.example.petclinic.model.service.OwnerService;
-import org.springframework.stereotype.Component;
+import com.example.petclinic.service.OwnerService;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {

@@ -2,8 +2,8 @@ package com.example.petclinic.bootstrap;
 
 import com.example.petclinic.model.Owner;
 import com.example.petclinic.model.Vet;
-import com.example.petclinic.model.service.OwnerService;
-import com.example.petclinic.model.service.VetService;
+import com.example.petclinic.service.OwnerService;
+import com.example.petclinic.service.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
