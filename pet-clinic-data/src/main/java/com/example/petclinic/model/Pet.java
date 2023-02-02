@@ -3,6 +3,8 @@ package com.example.petclinic.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "pets")
@@ -18,6 +20,8 @@ public class Pet extends BaseEntity{
     @JoinColumn(name = "owner_id")//TODO: not only is it not needed for the actual mapping, but also for name too - because it's by default - please verify
     private Owner owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
     public String getName() {
         return name;
     }
@@ -48,5 +52,13 @@ public class Pet extends BaseEntity{
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }
