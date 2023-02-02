@@ -1,13 +1,21 @@
 package com.example.petclinic.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "pets")
 public class Pet extends BaseEntity{
-
+    @Column(name = "name")
     private String name;
-    private LocalDate birthday;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+    @ManyToOne
+    @JoinColumn(name = "type_id")//TODO: here is not the same shit - because it's unidirectional - just play around with it - I'm curious
     private PetType petType;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")//TODO: not only is it not needed for the actual mapping, but also for name too - because it's by default - please verify
     private Owner owner;
 
     public String getName() {
@@ -18,12 +26,12 @@ public class Pet extends BaseEntity{
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setBirthDate(LocalDate birthday) {
+        this.birthDate = birthday;
     }
 
     public PetType getPetType() {
