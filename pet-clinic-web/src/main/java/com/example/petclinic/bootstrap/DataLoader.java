@@ -18,13 +18,15 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final PetService petService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
 
@@ -77,7 +79,6 @@ public class DataLoader implements CommandLineRunner {
         owner1.getPets().add(mickyPet);
 
         ownerService.save(owner1);
-        petService.save(mickyPet);//TODO: Is this needed? my approach
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
@@ -94,7 +95,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(fionaPet);
 
         ownerService.save(owner2);
-        petService.save(fionaPet);//TODO: Is this needed? - my approach
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionaPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners....");
 
@@ -108,7 +115,7 @@ public class DataLoader implements CommandLineRunner {
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
-        vet2.getSpecialties().add(savedSurgery);//TODO: Why don t we have a vet entity into specialities?
+        vet2.getSpecialties().add(savedSurgery);
 
         vetService.save(vet2);
 
