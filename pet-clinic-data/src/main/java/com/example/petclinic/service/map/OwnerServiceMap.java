@@ -21,13 +21,13 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        return super.map.values().stream().filter(x -> x.getLastName().equals(lastName)).findFirst().orElse(null);
+        return super.map.values().stream().filter(x -> x.getLastName().equalsIgnoreCase(lastName)).findFirst().orElse(null);
     }
 
     @Override
     public Owner save(Owner object) {
         if (object != null) {
-            if (object.getPets().size() > 0) {
+            if (object.getPets() != null) {
                 object.getPets().forEach(pet -> {
                     if (pet.getPetType() != null) {
                         if (pet.getPetType().getId() == null) {

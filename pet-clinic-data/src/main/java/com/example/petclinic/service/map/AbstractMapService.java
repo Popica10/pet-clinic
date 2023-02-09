@@ -38,8 +38,8 @@ public abstract class AbstractMapService<T extends BaseEntity,ID extends Long> i
 
     @Override
     public void delete(T object) {
-        map.entrySet().removeIf(idtEntry -> idtEntry.getValue().equals(object));
-//        map.values().remove(object); TODO: just verify if this one works --> I could bet on it;
+//        map.entrySet().removeIf(idtEntry -> idtEntry.getValue().equals(object));
+        map.values().remove(object); // just verify if this one works --> I could bet on it; -- > it does work;
     }
 
     @Override
